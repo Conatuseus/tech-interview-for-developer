@@ -9,7 +9,7 @@
 ## 🔎 Interview
 
 - [언어(Java, Kotlin)](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/Language)
-- [자료구조](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/Data Structure)
+- [자료구조](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/Data%20Structure)
 - [운영체제](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/OS)
 - [데이터베이스](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/Database)
 - [네트워크](https://github.com/Conatuseus/tech-interview-for-developer/tree/master/interview/Network)
