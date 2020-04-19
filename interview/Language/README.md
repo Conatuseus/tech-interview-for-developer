@@ -20,7 +20,13 @@
 
 #### JVM 구성 각각에 대해 설명해주세요.
 
-> 
+> Class Loader는 JVM내로 클래스(.class파일)를 로드하고, 링크를 통해 배치하는 작업을 수행하는 모듈입니다. 런타임 시에 동적으로 클래스를 로드합니다.
+>
+> Execution Engine은 메모리에 적재된 클래스(바이트 코드)들을 기계어로 변경해 명령어 단위로 실행하는 역할을 합니다. 그 과정은 인터프리터 방식, JIT 컴파일러를 이용하는 방식이 있습니다.
+>
+> Garbage Collector(GC)는 Heap 메모리 영역에 생성(적재)된 객체들 중에 참조되지 않는 객체들을 탐색 후 제거하는 역할을 합니다. GC가 수행되는 동안 GC를 수행하는 쓰레드가 아닌 다른 모든 쓰레드가 일시정지되는 특징이 있습니다.
+>
+> Runtime Data Area는 JVM의 메모리 영역으로 자바 애플리케이션을 실행할 때 사용되는 데이터들을 적재하는 영역입니다. 이 영역은 크게 Method 영역, Heap 영역, Stack 영역, PC Register, Native Method Stack으로 구성되어 있습니다.
 
 <br/>
 
@@ -50,13 +56,21 @@
 
 #### 자바 프로그램 실행 과정을 설명해주세요.
 
-<br/>
+> 1. 프로그램이 실행되면 JVM은 OS로부터 이 프로그램이 필요로 하는 메모리를 할당받습니다. JVM은 이 메모리를 용도에 따라 여러 영역으로 나누어 관리합니다.
+> 2. 자바 컴파일러(javac)가 자바 소스코드(.java)를 읽어들여 자바 바이트코드(.class)로 변환시킵니다.
+> 3. Class Loader를 통해 .class 파일들을 JVM으로 로딩합니다.
+> 4. 로딩된 .class 파일들은 Execution engine을 통해 해석됩니다.
+> 5. 해석된 바이트코드는 Runtime Data Areas에 배치되어 실질적인 수행이 이루어지게 됩니다.
+>
+> 이러한 실행과정 속에서 JVM은 필요에 따라 Thread Synchronization과 GC 같은 관리작업을 수행합니다.
 
 <br/>
 
 <br/>
 
-#### GC 과정에 대해 설명해주세요.
+<br/>
+
+#### GC가 무엇인가요? (GC 정의, 종류 등)
 
 > 
 
@@ -183,7 +197,7 @@
 
 <br/>
 
-#### 그럼 Java는 Call By Value일까요? Call By Reference일까요?
+#### Java는 Call By Value일까요? Call By Reference일까요?
 
 > 
 
@@ -193,7 +207,17 @@
 
 <br/>
 
-#### Refence
+#### String VS StringBuilder VS StringBuffer ?
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+#### Reference
 
 > - [JVM-Jbee님](https://asfirstalways.tistory.com/158)
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
