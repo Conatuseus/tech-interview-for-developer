@@ -120,7 +120,19 @@
 
 #### 제네릭에 대해 설명해주세요.
 
-> 
+> 제네릭(Generic)은 클래스 내부에서 사용하는 데이터의 타입(Type)을 클래스의 인스턴스를 생성할 때 결정하는 것을 의미합니다. 객체 생성이 가능한 타입에 대해서만 제네릭(Generic) 사용이 가능하며, 생성자 인자로 넣어줄 경우에는 생성시 제네릭을 생략할 수 있습니다.
+>
+> 제네릭의 장점은 객체의 타입을 컴파일 시점에 체크하기 때문에 타입 안정성을 높이고 형 변환의 번거로움을 줄일 수 있습니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+#### `class A<T extends B>` 에 대해 설명해주세요.
+
+> T 매개변수의 타입은 B 객체 타입이거나 B 클래스를 상속받는 클래스의 타입만 올 수 있도록 제한하겠다는 의미입니다. 
 
 <br/>
 
@@ -223,6 +235,14 @@
 
 #### String VS StringBuilder VS StringBuffer ?
 
+> 한번 생성된 String 인스턴스가 갖고 있는 문자열은 읽어 올 수만 있고, 변경할 수는 없습니다. `+` 연산자를 이용해서 문자열을 결합하는 경우, 인스턴스 내의 문자열이 바뀌는 것이 아니라 새로운 문자열이 담긴 String 인스턴스가 생성되어 메모리 공간을 차지하게 됩니다. 따라서 GC(Garbage Collector)가 호출되기 전까지 연산할 때 쓰인 String들이 heap에 계속 쌓이므로 메모리 관리 측면에서 치명적입니다.
+>
+> String 클래스는 인스턴스를 생성할 때 지정된 문자열을 변경할 수 없지만 StringBuffer 클래스는 변경이 가능합니다. 내부적으로 문자열 편집을 위한 버퍼(buffer)를 가지고 있으며, StringBuffer 인스턴스를 생성할 때 그 크기를 지정할 수 있다.
+>
+> StringBuffer는 멀티쓰레드에 안전(thread safe)하도록 동기화되어 있습니다. 따라서 멀티쓰레드로 작성된 프로그램이 아닌 경우, StringBuffer의 동기화는 불필요하게 성능만 떨어뜨리게 됩니다.
+>
+> 그래서 StringBuffer에서 쓰레드의 동기화만 뺀 StringBuilder가 추가된 것입니다. StringBuilder는 StringBuffer와 완전히 똑같은 기능으로 작성되어 있습니다.
+
 <br/>
 
 <br/>
@@ -235,6 +255,7 @@
 
 > - [JVM-Jbee님](https://asfirstalways.tistory.com/158)
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
+> - [제네릭](https://lktprogrammer.tistory.com/177)
 
 
 
