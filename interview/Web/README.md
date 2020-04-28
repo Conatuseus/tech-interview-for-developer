@@ -123,7 +123,17 @@
 
 <br/>
 
+#### `Controller`과 `RestController`의 차이에 대해 설명해주세요
 
+> Controller는 보통 View를 반환하는 목적으로 쓰이며, Data를 반환해야 하는 경우에는 @ResponseBody 어노테이션을 사용해야 합니다.
+>
+> RestController는 Controller에 @ResponseBody가 합쳐진 것으로 Json/Xml 형태로 객체 데이터를 반환하는 것이 주용도입니다. 
+
+<br/>
+
+<br/>
+
+<br/>
 
 
 
@@ -132,3 +142,4 @@
 > - [AOP](https://shlee0882.tistory.com/206)
 >
 > - [AOP-이동욱님](https://jojoldu.tistory.com/71)
+> - [Controller VS RestController - 망나니 개발자](https://mangkyu.tistory.com/49)
