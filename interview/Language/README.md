@@ -82,9 +82,78 @@
 
 <br/>
 
+#### GC 구성, 과정에 대해 설명해주세요.
+
+> JVM Heap은 Young Generation, Old Generation, Permanent Generation 영역으로 구성되어 있습니다. Young 영역은 Eden 영역과 2개의 Survivor 영역으로 나뉩니다.
+>
+> 새롭게 생성한 객체의 대부분이 Young Generation에 위치합니다. 대부분의 객체가 금방 접근 불가능 상태가 되기 때문에 매우 많은 객체가 Young 영역에 생성되었다가 사라집니다. 이 영역에서 객체가 사라질때 Minor GC가 발생한다고 말합니다. Young 영역 내부에서 과정은 다음과 같습니다.
+>
+> - 새로 생성한 대부분의 객체는 Eden 영역에 위치합니다.
+> - Eden 영역에서 GC가 한 번 발생한 후 살아남은 객체는 Survivor 영역 중 하나로 이동됩니다.
+> - Eden 영역에서 GC가 발생하면 이미 살아남은 객체가 존재하는 Survivor 영역으로 객체가 계속 쌓입니다.
+> - 하나의 Survivor 영역이 가득 차게 되면 그 중에서 살아남은 객체를 다른 Survivor 영역으로 이동합니다. 그리고 가득 찬 Survivor 영역은 아무 데이터도 없는 상태로 됩니다.
+> - 이 과정을 반복하다가 계속해서 살아남아 있는 객체는 Old 영역으로 이동하게 됩니다.
+>
+> Old 영역에는 512바이트의 덩어리(chunk)로 되어 있는 카드 테이블(card table)이 존재합니다. 카드 테이블에는 Old 영역에 있는 객체가 Young 영역의 객체를 참조할 때마다 정보가 표시됩니다. Young 영역의 GC를 실행할 때에는 Old 영역에 있는 모든 객체의 참조를 확인하지 않고, 이 카드 테이블만 뒤져서 GC 대상인지 식별합니다.
+>
+> 접근 불가능 상태로 되지 않아 Young 영역에서 살아남은 객체가 Old 영역으로 복사됩니다. 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC는 적게 발생합니다. 이 영역에서 객체가 사라질 때 Major GC(혹은 Full GC)가 발생한다고 말합니다.
+>
+> Permanent 영역은 객체나 억류(intern)된 문자열 정보를 저장하는 곳이며, 여기서 GC가 발생해도 Major GC의 횟수에 포함됩니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
 #### GC 종류별로 설명해주세요. (차이, 특징 등)
 
-> 
+> - Serial GC
+>
+> Serial GC는 Young 영역에서는 위의 방법으로 하고, Old 영역은 Mark-Sweep-Compact 알고리즘을 사용합니다. 이 알고리즘의 첫 단계는 Old 영역에 살아 있는 객체를 식별(Mark)하는 것입니다. 그 다음에는 힙(heap)의 앞 부분부터 확인하여 살아 있는 것만 남깁니다(Sweep). 마지막 단계에서는 각 객체들이 연속되게 쌓이도록 힙의 가장 앞 부분부터 채워서 객체가 존재하는 부분과 객체가 없는 부분으로 나눕니다(Compaction). Serial GC는 적은 메모리와 CPU 코어 개수가 적을 때 적합한 방식입니다.
+>
+> - Parallel GC
+>
+> Parallel GC는 Serial GC와 기본적인 알고리즘은 같습니다. 그러나 Serial GC는 GC를 처리하는 스레드가 하나인 것에 비해, Parallel GC는 GC를 처리하는 쓰레드가 여러 개입니다. 그렇기 때문에 Serial GC보다 빠른게 객체를 처리할 수 있습니다. Parallel GC는 메모리가 충분하고 코어의 개수가 많을 때 유리합니다.
+>
+> - CMS GC
+>
+> 초기 Initial Mark 단계에서는 클래스 로더에서 가장 가까운 객체 중 살아 있는 객체만 찾는 것으로 끝냅니다. 따라서, 멈추는 시간은 매우 짧습니다. 그리고 Concurrent Mark 단계에서는 방금 살아있다고 확인한 객체에서 참조하고 있는 객체들을 따라가면서 확인합니다. 이 단계의 특징은 다른 스레드가 실행 중인 상태에서 동시에 진행된다는 것입니다.
+>
+> 그 다음 Remark 단계에서는 Concurrent Mark 단계에서 새로 추가되거나 참조가 끊긴 객체를 확인합니다. 마지막으로 Concurrent Sweep 단계에서는 쓰레기를 정리하는 작업을 실행합니다. 이 작업도 다른 스레드가 실행되고 있는 상황에서 진행합니다.
+>
+> 이러한 단계로 진행되는 GC 방식이기 때문에 stop-the-world 시간이 매우 짧습니다. 모든 애플리케이션의 응답 속도가 매우 중요할 때 CMS GC를 사용하며, Low Latency GC라고도 부릅니다.
+>
+> 단점은 다른 GC 방식보다 메모리와 CPU를 더 많이 사용하며, Compaction 단계가 기본적으로 제공되지 않는다는 것입니다.
+>
+> - G1 GC
+>
+> G1 GC는 앞서 살펴본 GC와는 다른 방식으로 힙 메모리를 관리합니다. 앞서 살펴보았던 Eden, Survivor, Old 영역이 존재하지만 고정된 크기로 고정된 위치에 존재하는 것이아니며, 전체 힙 메모리 영역을 Region 이라는 특정한 크기로 나눠서 각 Region의 상태에 따라 그 Region에 역할(Eden, Survivor, Old)이 동적으로 부여되는 상태입니다.
+>
+> G1 GC에서는 다른 Heap 영역에서 봐왔던 Young, Old와 다른 두 영역 추가로 존재합니다.
+>
+> Humongous : Region 크기의 50%를 초과하는 큰 객체를 저장하기 위한 공간이며, 이 Region 에서는 GC 동작이 최적으로 동작하지 않습니다.
+>
+> Available/Unused : 아직 사용되지 않은 Region을 의미합니다.
+>
+> G1 GC에서 Minor GC를 수행할 때는 STW(Stop-The-World) 현상이 발생하며, STW 시간을 최대한 줄이기 위해 멀티스레드로 GC를 수행합니다. Young GC는 각 Region 중 GC대상 객체가 가장 많은 Region(Eden 또는 Survivor 역할) 에서 수행 되며, 이 Region에서 살아남은 객체를 다른 Region(Survivor 역할) 으로 옮긴 후, 비워진 Region을 사용가능한 Region으로 돌리는 형태로 동작합니다.
+>
+> G1 GC에서 Major GC가 수행될 때는 Initial Mark -> Root Region Scan -> Concurrent Mark -> Remark -> Cleanup -> Copy 단계를 거치게됩니다.
+>
+> - Initial Mark
+>   - Old Region 에 존재하는 객체들이 참조하는 Survivor Region 을 찾는다. 이 과정에서는 STW 현상이 발생하게 됩니다.
+> - Root Region Scan
+>   - Initial Mark 에서 찾은 Survivor Region에 대한 GC 대상 객체 스캔 작업을 진행합니다.
+> - Concurrent Mark
+>   - 전체 힙의 Region에 대해 스캔 작업을 진행하며, GC 대상 객체가 발견되지 않은 Region 은 이후 단계를 처리하는데 제외되도록 합니다.
+> - Remark
+>   - 애플리케이션을 멈추고(STW) 최종적으로 GC 대상에서 제외될 객체(살아남을 객체)를 식별해냅니다.
+> - Cleanup
+>   - 애플리케이션을 멈추고(STW) 살아있는 객체가 가장 적은 Region 에 대한 미사용 객체 제거 수행합니다. 이후 STW를 끝내고, 앞선 GC 과정에서 완전히 비워진 Region 을 Freelist에 추가하여 재사용될 수 있게 합니다.
+> - Copy
+>   - GC 대상 Region이었지만 Cleanup 과정에서 완전히 비워지지 않은 Region의 살아남은 객체들을 새로운(Available/Unused) Region 에 복사하여 Compaction 작업을 수행합니다.
+>
+> Java 7,8 에서는 Parallel GC이고, Java 9부터 G1 GC를 사용합니다.
 
 <br/>
 
@@ -285,11 +354,4 @@
 > - [JVM-Jbee님](https://asfirstalways.tistory.com/158)
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
 > - [제네릭](https://lktprogrammer.tistory.com/177)
-
-
-
-
-
-
-
-#### 
+> - [GC-Naver D2 이상민님](https://d2.naver.com/helloworld/1329)
