@@ -156,6 +156,14 @@
 
 <br/>
 
+#### Bean Scope 종류와 특징을 말해주세요.
+
+> - singleton: 하나의 Bean 정의에 대해서 Spring IoC 컨테이너 내에 단 하나의 객체만 존재하는 것입니다. bean scope이 지정되지 않으면 기본적으로 싱글톤입니다.
+>
+> - prototype: 프로토타입은 모든 요청에 대해 새로운 객체를 생성합니다.
+> - request: 하나의 Bean 정의에 대해 하나의 HTTP Request의 생명주기 안에 단 하나의 객체만 존재합니다.
+> - session: 하나의 Bean 정의에 대해 하나의 HTTP Session의 생명주기 안에 단 하나의 객체만 존재합니다.
+
 
 
 # REFERENCE
