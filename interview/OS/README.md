@@ -42,6 +42,32 @@
 
 <br/>
 
+#### Context Switching이란 무엇인가요?
+
+> Context Switching은 현재 진행하고 있는 Task(Process, Thread)의 상태를 저장하고 다음 진행할 Task의 상태 값을 읽어 적용하는 과정을 말합니다. 
+>
+> Context Switching의 과정은 다음과 같습니다.
+>
+> - Task의 대부분 정보는 Register에 저장되고 PCB(Process Control Block)로 관리되고 있습니다.
+> - 현재 실행하고 있는 Task의 PCB 정보를 저장하게 됩니다. (Process Stack, Ready Queue)
+> - 다음 실행할 Task의 PCB 정보를 읽어 Register에 적재하고 CPU가 이전에 진행했던 과정을 연속적으로 수행을 할 수 있습니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+#### PCB는 무엇인가요?
+
+> PCB는 운영체제가 프로세스에 대한 정보를 저장해놓는 곳입니다. 프로세스 식별자, 프로세스 상태, Program Counter(이 프로세스가 다음에 실행할 명령어의 주소값), 포인터 등이 저장되어 있습니다. 각 프로세스가 생성될 때마다 고유의 PCB가 생성되며 프로세스가 완료되면 PCB는 제거됩니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
 #### 멀티 프로그래밍?
 
 > 멀티 프로그래밍은 프로세서의 자원 낭비를 최소화하기 위해 낭비하는 시간을 다른 프로세스 수행에 쓰게 하여, 하나의 프로세서에서 여러 프로세스를 교대로 수행할 수 있게 하는 것입니다.
@@ -153,8 +179,6 @@
 <br/>
 
 <br/>
-
-
 
 # Reference
 
