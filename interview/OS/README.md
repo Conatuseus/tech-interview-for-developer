@@ -180,6 +180,31 @@
 
 <br/>
 
+#### 메모리 관리 기법에 대해 설명해주세요.
+
+> 메모리 할당에는 CMA(Continuous Memory Allocation: 연속 메모리 할당), Paging, Segmentation 있습니다.
+>
+> >  CMA는 연속된 공간의 메모리를 프로세스에게 할당해주는 방법입니다. 연속적으로 메모리를 할당해주면 프로세스마다 할당된 메모리 공간 사이에 할당되지 않은 빈 공간이 생기게 되는데 이를 Hole이라 합니다. 연속 메모리 공간을 할당해주는 방법에도 3가지 방법이 있습니다.
+> >
+> > 1) First-Fit : 메모리 요청이 들어왔을 때 요청한 크기를 만족하는 Hole 중 가장 첫 번째 Hole을 할당
+> >
+> > 2) Best-Fit : 메모리 요청이 들어왔을 때 요청한 크기를 만족하는 Hole 중 가장 작은 크기의 Hole을 할당
+> >
+> > 3) Worst-Fit : Best-Fit과 반대로 요청한 크기를 만족하는 Hole 중 가장 큰 크기의 Hole을 할당
+> >
+> > CMA는 외부 단편화 발생과 Compaction 과정으로 인한 오버헤드가 큰 단점이 있습니다.
+>
+> > Paging은 메인 메모리를 일정한 사이즈의 frame으로 분할하고 프로세스도 그 크기에 맞춰 분할해 할당하는 방법입니다. 분할된 프로세스 조각을 Page라 부릅니다. Page Table에 각 Page가 어느 Frame에 위치하는지 저장됩니다.
+>
+> > Segmentation은 메모리를 서로 크기가 다른 논리적 단위인 세그먼트(Segment)로 분할하고, 할당하는 방법입니다. 
+
+<br/>
+
+<br/>
+
+<br/>
+
 # Reference
 
 > - [CPU 스케줄링 - preamtree님](https://preamtree.tistory.com/19)
+> - [메모리 관리 기법 - 군옥수수수님](https://baked-corn.tistory.com/16?category=718232)
