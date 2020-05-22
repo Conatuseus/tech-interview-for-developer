@@ -223,6 +223,94 @@
 > 4. 주제와 옵저버는 서로 독립적으로 재사용할 수 있습니다.
 > 5. 주제나 옵저버가 바뀌더라도 서로한테 영향을 미치지 않습니다.
 >
+> <br/>
+>
+> WetherData 객체(기상 스테이션으로부터 오는 데이터를 추적하는 객체), 그리고 사용자에게 현재 기상 조건을 보여주는 디스플레이의 예
+>
+> ~~~ java
+> public interface Subject {
+>   public void registerObserver (Observer o);
+>   public void removeObserver (Observer o);
+>   public void notifyObservers();
+> }
+> 
+> public interface Observer {
+>   public void update (float temp, float humidity, float pressure);
+> }
+> 
+> public interface DisplayElement {
+>   public void display();
+> }
+> ~~~
+>
+> ~~~ java
+> public class WeatherData implements Subject {
+>   private ArrayList<Observer> observers;
+>   private float temperature;
+>   private float humidity;
+>   private float pressure;
+>   
+>   public WetherData() {
+>     this.observers = new ArrayList<>();
+>   }
+>   
+>   public void registerObserver(Observer o) {
+>     observers.add(o);
+>   }
+>   
+>   public void removeObserver(Observer o) {
+>     int index = observers.indexOf(o);
+>     if (index >= 0) {
+>       observers.remove(index);
+>     }
+>   }
+>   
+>   public void notifyObservers() {
+>     for (Observer observer : observers) {
+>       observer.update(temperature, humidity, pressure);
+>     }
+>   }
+>   
+>   public void measurementsChanged() {
+>     notifyObservers();
+>   }
+>   
+>   public void setMeasurements(float temperature, float humidity, float pressure) {
+>     this.temperature = temperature;
+>     this.humidity = humidity;
+>     this.pressure = pressure;
+>     measurementsChanged();
+>   }
+>   
+>   // 기타 WeatherData 메서드
+> }
+> ~~~
+>
+> ~~~ java
+> public class CurrentConditionsDisplay implements Observer, DisplayElement {
+>   private float temperature;
+>   private float humidity;
+>   private Subject weatherData;
+>   
+>   public CurrentConditionsDisplay(Subject weatherData) {
+>     this.weatherData = weatherData;
+>     weatherData.registerObserver(this);
+>   }
+>   
+>   public void update(float temperature, float humidity, float pressure) {
+>     this.temperature = temperature;
+>     this.humidity = humidity;
+>     display();
+>   }
+>   
+>   public void display() {
+>     System.out.println("Current conditions: " + temperature + "F degrees and " + humidity + "% humidity")
+>   }
+> }
+> ~~~
+>
+> 
+>
 > 옵저버 패턴은 직접 구현할 수도 있지만 자바에 내장된 옵저버 패턴을 사용할 수 있습니다.
 
 <br/>
