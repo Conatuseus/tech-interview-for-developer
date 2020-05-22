@@ -324,6 +324,7 @@
 > - [싱글톤 패턴 - 정아마추어님](https://jeong-pro.tistory.com/86)
 > - [전략 패턴 - Limky님](https://limkydev.tistory.com/84)
 > - [팩토리 메서드 패턴 - JDM's blog](https://jdm.kr/blog/180)
+> - [옵저버 패턴 - Head First 디자인패턴 책](https://book.naver.com/bookdb/book_detail.nhn?bid=1882446)
 
 
 
