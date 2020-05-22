@@ -185,18 +185,6 @@
 
 <br/>
 
-#### 팩토리 메서드 패턴(Factory Method Pattern)
-
-> 팩토리 메서드 패턴은 객체 생성 처리를 서브 클래스로 분리 해 처리하도록 캡슐화하는 패턴입니다. 객체의 생성 코드를 별도의 클래스/메서드로 분리함으로써 객체 생성의 변화에 대비하는 데 유리합니다.
->
-> 팩토리 메소드 패턴을 사용하는 이유는 클래스간의 결합도를 낮추기 위한것입니다. 결합도라는 것은 간단히 말해 클래스의 변경점이 생겼을 때 얼마나 다른 클래스에도 영향을 주는가입니다. 팩토리 메소드 패턴을 사용하는 경우 직접 객체를 생성해 사용하는 것을 방지하고 서브 클래스에 위임함으로써 보다 효율적인 코드 제어를 할 수 있고 의존성을 제거합니다. 결과적으로 결합도 또한 낮출 수 있습니다.
-
-<br/>
-
-<br/>
-
-<br/>
-
 #### 전략 패턴(Strategy Pattern)
 
 > 객체들이 할 수 있는 행위 각각에 대해 전략 클래스를 생성하고, 유사한 행위들을 캡슐화 하는 인터페이스를 정의하여, 객체의 행위를 동적으로 바꾸고 싶은 경우 직접 행위를 수정하지 않고 전략을 바꿔주기만 함으로써 행위를 유연하게 확장하는 방법을 말합니다.
@@ -319,12 +307,135 @@
 
 <br/>
 
+#### 팩토리 메서드 패턴(Factory Method Pattern)
+
+> 팩토리 메서드 패턴은 객체 생성 처리를 서브 클래스로 분리 해 처리하도록 캡슐화하는 패턴입니다.
+>
+> 팩토리 메서드 패턴의 장점은
+>
+> 1. 객체 생성 코드를 전부 한 객체 또는 메서드에 집어 넣으면 코드에서 중복되는 내용을 제거할 수 있고, 관리할 때도 한 군데에서만 신경을 쓰면 됩니다.
+> 2. 클라이언트 입장에서는 객체 인스턴스를 만들 때 필요한 구상 클래스가 아닌 인터페이스만 필요로 하게 됩니다. 이런 방법을 도입하면 구현이 아닌 인터페이스 바탕으로 프로그래밍을 할 수 있게 되고, 그 결과 유연성과 확장성이 뛰어는 코드를 만들 수 있습니다.
+>
+> <br/>
+>
+> 팩토리 메서드 패턴 코드 예
+>
+> ~~~ java
+> public abstract class PizzaStore {
+>   public Pizza orderPizza (String type) {
+>     Pizza pizza = createPizza(type);
+>     
+>     pizza.prepare();
+>     pizza.bake();
+>     pizza.cut();
+>     pizza.box();
+>     
+>     return pizza;
+>   }
+>   
+>   protected abstract Pizza createPizza (String type);
+> }
+> ~~~
+>
+> ~~~ java
+> public class NYPizzaStore extends PizzaStore {
+>   
+>   Pizza createPizza (String item) {
+>     if (item.equals("cheese")) {
+>       return new NYStyleCheesePizza();
+>     } else if (item.equals("veggie")) {
+>       return new NYStyleVeggiePizza();
+>     } else if (item.equals("pepperoni")) {
+>       return new NYStylePepperoniPizza();
+>     } else {
+>       return null;
+>     }
+>   }
+> }
+> ~~~
+>
+> ~~~ java
+> public abstract class Pizza {
+>   String name;
+>   String dough;
+>   String sauce;
+>   ArrayList toppings = new ArrayList();
+>   
+>   void preprae() {
+>     System.out.println("Preparing " + name);
+>     System.out.println("Tossing dough...");
+>     System.out.println("Adding sauce...");
+>     System.out.println("Adding toppings: ");
+>     
+>     for (String topping: toppings) {
+>       System.out.println("   " + topping)
+>     }
+>   }
+>   
+>   void bake() {
+>     System.out.println("~~");
+>   }
+>    
+>   void cut() {
+>     System.out.println("~~");
+>   }
+>     
+>   void box() {
+>     System.out.println("~~");
+>   }
+>   
+>   public String getName() {
+>     return name;
+>   }
+> }
+> ~~~
+>
+> ~~~ java
+> public class NYStyleChessePizza extends Pizza {
+>   public NYStyleCheesePizza() {
+>     name = "NY Style Sauce and Cheese Pizza";
+>     dough = "Thin Crust Dough";
+>     sauce = "Marinara Sauce";
+>     
+>     toppings.add("Grated Reggiano Cheese");
+>   }
+> }
+> ~~~
+>
+> ~~~ java
+> public class PizzaTestDrive {
+>   public static void main(String[] args) {
+>     PizzaStore nyStore = new NYPizzaStore();
+>     PizzaStore chicagoStore = new ChicagoPizzaStore();
+>     
+>     Pizza pizza = nyStore.orderPizza("cheese");
+>     
+>     pizza = chicagoStore.orderPizza("cheese");
+>   }
+> }
+> ~~~
+>
+> <br>
+>
+> <br>
+>
+> <br>
+>
+> <br>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
 ## Reference
 
 > - [싱글톤 패턴 - 정아마추어님](https://jeong-pro.tistory.com/86)
 > - [전략 패턴 - Limky님](https://limkydev.tistory.com/84)
-> - [팩토리 메서드 패턴 - JDM's blog](https://jdm.kr/blog/180)
-> - [옵저버 패턴 - Head First 디자인패턴 책](https://book.naver.com/bookdb/book_detail.nhn?bid=1882446)
+> - [옵저버 패턴, 팩토리 메서드 패턴 - Head First 디자인패턴 책](https://book.naver.com/bookdb/book_detail.nhn?bid=1882446)
 
 
 
