@@ -392,6 +392,20 @@
 
 #### Checked Exception VS Unchecked Exception
 
+> Checked Exception은 컴파일 단계에서 발견되는 예외이며 반드시  `try/catch` 로 감싸거나 `throw` 로 던져서 처리해야 합니다. 그리고 예외 발생 시 트랜잭션을 roll back 하지 않고 예외를 던저줍니다. Checked Exception의 대표적 예는 IOException, SQLException이 있습니다.
+>
+> Unchecked Exception은 실행 단계에서 발견되는 예외이며 명시적인 처리를 강제하지 않습니다. 그리고 예외 발생 시 트랜잭션을 roll back 합니다. Unchecked Exception의 대표적 예는 NullPointerException, IllegalArgumentException, IndexOutOfBoundException이 있습니다.
+
+![예외 구조](./image/ExceptionArchitecture.png)
+
+<br/>
+
+<br/>
+
+<br/>
+
+#### 예외 처리 방법에 대해 설명해주세요.
+
 > 
 
 <br/>
@@ -407,3 +421,4 @@
 > - [제네릭](https://lktprogrammer.tistory.com/177)
 > - [GC-Naver D2 이상민님](https://d2.naver.com/helloworld/1329)
 > - [Call by value vs Call by reference - 머루의 개발블로그](http://wonwoo.ml/index.php/post/1679)
+> - [Checked Exception VS Unchecked Exception](http://www.nextree.co.kr/p3239/)
