@@ -94,9 +94,9 @@
 > - 하나의 Survivor 영역이 가득 차게 되면 그 중에서 살아남은 객체를 다른 Survivor 영역으로 이동합니다. 그리고 가득 찬 Survivor 영역은 아무 데이터도 없는 상태로 됩니다.
 > - 이 과정을 반복하다가 계속해서 살아남아 있는 객체는 Old 영역으로 이동하게 됩니다.
 >
-> Old 영역에는 512바이트의 덩어리(chunk)로 되어 있는 카드 테이블(card table)이 존재합니다. 카드 테이블에는 Old 영역에 있는 객체가 Young 영역의 객체를 참조할 때마다 정보가 표시됩니다. Young 영역의 GC를 실행할 때에는 Old 영역에 있는 모든 객체의 참조를 확인하지 않고, 이 카드 테이블만 뒤져서 GC 대상인지 식별합니다.
->
 > 접근 불가능 상태로 되지 않아 Young 영역에서 살아남은 객체가 Old 영역으로 복사됩니다. 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC는 적게 발생합니다. 이 영역에서 객체가 사라질 때 Major GC(혹은 Full GC)가 발생한다고 말합니다.
+>
+> [Old 영역의 객체가 Young 영역의 객체를 참조하는 경우 확인하는 방법] Old 영역에는 512바이트의 덩어리(chunk)로 되어 있는 카드 테이블(card table)이 존재합니다. 카드 테이블에는 Old 영역에 있는 객체가 Young 영역의 객체를 참조할 때마다 정보가 표시됩니다. Young 영역의 GC를 실행할 때에는 Old 영역에 있는 모든 객체의 참조를 확인하지 않고, 이 카드 테이블만 뒤져서 GC 대상인지 식별합니다.
 >
 > Permanent 영역은 객체나 억류(intern)된 문자열 정보를 저장하는 곳이며, 여기서 GC가 발생해도 Major GC의 횟수에 포함됩니다.
 
@@ -352,9 +352,11 @@
 
 <br/>
 
-#### Call By Value와 Call By Reference에 대해 설명해주세요.
+#### Call by value와 Call by reference에 대해 설명해주세요.
 
-> 
+> `Call by value` 호출 방식은 함수 호출 시 전달되는 변수 값을 복사해서 함수 인자로 전달합니다. 이때 복사된 인자는 함수 안에서 지역적으로 사용되기 때문에 local value 속성을 가집니다. 따라서, 함수 안에서 인자 값이 변경되더라도, 외부 변수 값은 변경이 되지 않습니다.
+>
+> `Call by reference` 호출 방식은 함수 호출 시 인자로 전달되는 변수의 레퍼런스를 전달합니다. 따라서 함수 안에서 인자 값이 변경되면, 아규먼트로 전달된 객체의 값도 변경됩니다.
 
 <br/>
 
@@ -364,7 +366,11 @@
 
 #### Java는 Call By Value일까요? Call By Reference일까요?
 
-> 
+> 자바는 함수에 전달되는 인자의 데이터 타입에 따라 함수 호출 방식이 달라집니다.
+>
+> 인자의 데이터 타입이 원시 타입( int, float, long, char, boolean 등)일 경우 `Call by value` 로 동작하고, 참조 자료형(array, Class instance)일 경우 `Call by reference` 로 동작합니다. 
+>
+> (String은 참조 자료형이지만 Call by value로 동작합니다.)
 
 <br/>
 
@@ -388,7 +394,15 @@
 
 <br/>
 
+#### Checked Exception VS Unchecked Exception
 
+> 
+
+<br/>
+
+<br/>
+
+<br/>
 
 #### Reference
 
@@ -396,3 +410,4 @@
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
 > - [제네릭](https://lktprogrammer.tistory.com/177)
 > - [GC-Naver D2 이상민님](https://d2.naver.com/helloworld/1329)
+> - [Call by value vs Call by reference](https://github.com/gyoogle/tech-interview-for-developer/blob/master/Language/[java] Call by value와 Call by reference.md)
