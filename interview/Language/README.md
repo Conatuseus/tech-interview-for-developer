@@ -364,20 +364,6 @@
 
 <br/>
 
-#### Java는 Call By Value일까요? Call By Reference일까요?
-
-> 자바는 함수에 전달되는 인자의 데이터 타입에 따라 함수 호출 방식이 달라집니다.
->
-> 인자의 데이터 타입이 원시 타입( int, float, long, char, boolean 등)일 경우 `Call by value` 로 동작하고, 참조 자료형(array, Class instance)일 경우 `Call by reference` 로 동작합니다. 
->
-> (String은 참조 자료형이지만 Call by value로 동작합니다.)
-
-<br/>
-
-<br/>
-
-<br/>
-
 #### String VS StringBuilder VS StringBuffer ?
 
 > 한번 생성된 String 인스턴스가 갖고 있는 문자열은 읽어 올 수만 있고, 변경할 수는 없습니다. `+` 연산자를 이용해서 문자열을 결합하는 경우, 인스턴스 내의 문자열이 바뀌는 것이 아니라 새로운 문자열이 담긴 String 인스턴스가 생성되어 메모리 공간을 차지하게 됩니다. 따라서 GC(Garbage Collector)가 호출되기 전까지 연산할 때 쓰인 String들이 heap에 계속 쌓이므로 메모리 관리 측면에서 치명적입니다.
