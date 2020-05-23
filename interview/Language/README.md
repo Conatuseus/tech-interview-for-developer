@@ -364,6 +364,16 @@
 
 <br/>
 
+#### Java는 Call by value일까요, Call by reference 일까요?
+
+> Java는 Call by value라고 생각합니다. 함수의 인자가 원시 자료형인 경우엔 값을 넘기므로 당연히 Call by value라 생각됩니다. 하지만 인자가 참조 자료형일 때는 레퍼런스를 넘기는 것처럼 보이지만, 실제론 매개변수로 넘어오는 변수가 가리키는 인스턴스 메모리 주소를 넘겨주므로 Call by value입니다. 
+
+<br/>
+
+<br/>
+
+<br/>
+
 #### String VS StringBuilder VS StringBuffer ?
 
 > 한번 생성된 String 인스턴스가 갖고 있는 문자열은 읽어 올 수만 있고, 변경할 수는 없습니다. `+` 연산자를 이용해서 문자열을 결합하는 경우, 인스턴스 내의 문자열이 바뀌는 것이 아니라 새로운 문자열이 담긴 String 인스턴스가 생성되어 메모리 공간을 차지하게 됩니다. 따라서 GC(Garbage Collector)가 호출되기 전까지 연산할 때 쓰인 String들이 heap에 계속 쌓이므로 메모리 관리 측면에서 치명적입니다.
@@ -396,4 +406,4 @@
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
 > - [제네릭](https://lktprogrammer.tistory.com/177)
 > - [GC-Naver D2 이상민님](https://d2.naver.com/helloworld/1329)
-> - [Call by value vs Call by reference](https://github.com/gyoogle/tech-interview-for-developer/blob/master/Language/[java] Call by value와 Call by reference.md)
+> - [Call by value vs Call by reference - 머루의 개발블로그](http://wonwoo.ml/index.php/post/1679)
