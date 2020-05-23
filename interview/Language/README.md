@@ -68,9 +68,10 @@
 
 > 1. 프로그램이 실행되면 JVM은 OS로부터 이 프로그램이 필요로 하는 메모리를 할당받습니다. JVM은 이 메모리를 용도에 따라 여러 영역으로 나누어 관리합니다.
 > 2. 자바 컴파일러(javac)가 자바 소스코드(.java)를 읽어들여 자바 바이트코드(.class)로 변환시킵니다.
-> 3. Class Loader를 통해 .class 파일들을 JVM으로 로딩합니다.
-> 4. 로딩된 .class 파일들은 Execution engine을 통해 해석됩니다.
-> 5. 해석된 바이트코드는 Runtime Data Areas에 배치되어 실질적인 수행이 이루어지게 됩니다.
+> 3. Class Loader를 통해 바이트 코드(.class)를 JVM 내로 로드하고, 링크하여 Runtime Data Area에 배치합니다. 
+> 4. 실행 엔진(Execution Engine)은 JVM 메모리에 올라온 바이트 코드들을 명령어 단위로 하나씩 가져와서 실행합니다. 이때, 실행엔진은 2가지 방식으로 동작할 수 있습니다.
+>    - 자바 인터프리터 : 바이트 코드 명령어를 하나씩 읽어서 해석하고 실행합니다. 하나하나의 실행은 빠르나, 전체적인 실행 속도가 느리다는 단점을 가집니다.
+>    - JIT 컴파일러(Just-In-Time Compiler) : 인터프리터의 단점을 보완하기 위해 도입된 방식으로 바이트 코드 전체를 컴파일하여 바이너리 코드로 변경하고 이후에는 해당 메서드를 더이상 인터프리팅 하지 않고, 바이너리 코드로 직접 실행하는 방식입니다. 하나씩 인터프리팅하여 실행하는 것이 아니라 바이트 코드 전체가 컴파일된 바이너리 코드를 실행하는 것이기 때문에 전체적인 실행속도는 인터프리팅 방식보다 빠릅니다.
 >
 > 이러한 실행과정 속에서 JVM은 필요에 따라 Thread Synchronization과 GC 같은 관리작업을 수행합니다.
 
@@ -179,7 +180,7 @@
 
 <br/>
 
-#### 인터페이스와 추상클래스에 대해 설명해주세요(용도, 차이 등)
+#### 인터페이스와 추상클래스에 대해 설명해주세요(용도, 차이 등) => 수정 예정
 
 > 인터페이스는 구현하는 클래스에 특정한 메서드가 반드시 존재하도록 강제하는 역할입니다. java 8부터는 default 키워드를 통해 꼭 정의하지 않아도 됨을 명시주는 기능이 추가되었습니다.
 >
@@ -470,6 +471,7 @@
 
 > - [JVM-Jbee님](https://asfirstalways.tistory.com/158)
 > - [JVM-정아마추어님](https://jeong-pro.tistory.com/148)
+> - [자바 프로그램 실행 과정 - CODEMCD님](https://github.com/CODEMCD/technical-interview-speaking/tree/master/JAVA)
 > - [제네릭](https://lktprogrammer.tistory.com/177)
 > - [GC-Naver D2 이상민님](https://d2.naver.com/helloworld/1329)
 > - [Call by value vs Call by reference - 머루의 개발블로그](http://wonwoo.ml/index.php/post/1679)
