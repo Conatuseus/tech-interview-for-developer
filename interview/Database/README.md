@@ -22,9 +22,9 @@
 >
 > 일관성(Consistency)은 트랜잭션이 실행을 성공적으로 완료하면 언제나 일관성 있는 데이터베이스 상태로 유지하는 것을 의미합니다. 예를들어, A가 B에게 10원씩 두 번 송금했는데 B에게 입금이 안되거나 한번밖에 안되는 등의 데이터 불일치가 생겨선 안된다는 것입니다.
 >
-> 고립성(Isolation)은 트랜잭션을 수행 시 다른 트랜잭션의 연산 작업이 끼어들지 못하도록 보장하는 것을 의미합니다.
+> 고립성(Isolation)은 트랜잭션을 수행 시 다른 트랜잭션의 연산 작업이 끼어들지 못하도록 보장하는 것을 의미합니다. 대표적인 고립 수준은 4가지(Read Uncommitted, Read Committed, Repeatable Read, Serializable Read)가 있고 고립성 수준이 높을수록 동시성은 떨어집니다.
 >
-> 지속성(Durability)은 성공적으로 수행된 트랜잭션은 영원히 반영되어야 함을 의미합니다.
+> 지속성(Durability)은 성공적으로 수행된 트랜잭션은 다른 트랜잭션에 의해 변경되기 전까진 장애가 발생해도 변하지 않아야 함을 의미합니다.
 >
 > 트랜잭션의 연산은 Commit과 Rollback 연산이 있습니다.
 >
@@ -87,11 +87,103 @@
 
 <br/>
 
+#### Join에 대해 설명해주세요.
+
+> 조인은 두 개 이상의 테이블이나 데이터베이스를 연결하여 데이터를 검색하는 방법입니다. 자신이 검색하고 싶은 컬럼이 다른 테이블에 있을경우 주로 사용하며 여러개의 테이블을 마치 하나의 테이블인 것처럼 활용하는 방법입니다. 보통 Primary key혹은 Foreign key로 두 테이블을 연결합니다. 테이블을 연결하려면 적어도 하나의 칼럼은 서로 공유되고 있어야합니다.
+>
+> 조인의 종류는 INNER JOIN, OUTER JOIN(LEFT, RIGHT, FULL), 이 있습니다.
+>
+> > **INNER JOIN(이너 조인)**
+> >
+> > INNER JOIN은 쉽게 말해 교집합이며, 기준테이블과 Join한 테이블의 중복된 값을 보여줍니다. 결과값은 A의 테이블과 B테이블이 모두 가지고있는 데이터만 검색됩니다.
+> >
+> > ~~~ SQL
+> > --예제--
+> > SELECT
+> > A.NAME, --A테이블의 NAME조회
+> > B.AGE --B테이블의 AGE조회
+> > FROM EX_TABLE A
+> > INNER JOIN JOIN_TABLE B ON A.NO_EMP = B.NO_EMP AND A.DEPT = B.DEPT
+> > ~~~
+> >
+> > 
+> >
+> > ![이너조인](./image/INNERJOIN.png)
+> >
+> > 
+>
+> > **LEFT OUTER JOIN**
+> >
+> > 왼쪽 외부 조인은 테이블 A의 모든 데이터와 테이블 B와 매칭이 되는 레코드를 포함하는 조인입니다.
+> >
+> > ~~~ SQL
+> > --예제--
+> > SELECT
+> > A.NAME, --A테이블의 NAME조회
+> > B.AGE --B테이블의 AGE조회
+> > FROM EX_TABLE A
+> > LEFT OUTER JOIN JOIN_TABLE B ON A.NO_EMP = B.NO_EMP AND A.DEPT = B.DEPT
+> > ~~~
+> >
+> > ![LEFT OUTER JOIN](./image/LEFTOUTERJOIN.png)
+>
+> > **RIGHT OUTER JOIN**
+> >
+> > LEFT OUTER JOIN의 반대입니다.
+> >
+> > ![RIGHT OUTER JOIN](./image/RIGHTOUTERJOIN.png)
+>
+> > **FULL OUTER JOIN**
+> >
+> > 완전 외부 조인은 두 테이블이 가지고 있는 모든 데이터가 검색됩니다.
+> >
+> > 완전 외부 조인은 MySQL에서는 명시적인 SQL 구문은 지원하지 않지만, UNION을 사용해서 완전 외부 조인을 할 수 있습니다. 
+> >
+> > ~~~ SQL
+> > --예제--
+> > SELECT
+> > A.NAME, --A테이블의 NAME조회
+> > B.AGE --B테이블의 AGE조회
+> > FROM EX_TABLE A
+> > FULL OUTER JOIN JOIN_TABLE B ON A.NO_EMP = B.NO_EMP AND A.DEPT = B.DEPT
+> > ~~~
+> >
+> > ![FULL OUTER JOIN](./image/FULLOUTERJOIN.png)
+>
+> > **CROSS JOIN**
+> >
+> > 교차 조인은 두 테이블의 곱집합을 한 결과입니다. A 테이블에 3개의 튜플, B 테이블엔 4개의 튜블이 있을 경우에 교차 조인을 하면 총 12개의 튜플이 결과가 됩니다.
+> >
+> > ~~~ SQL
+> > --예제(첫번째방식)--
+> > SELECT
+> > A.NAME, --A테이블의 NAME조회
+> > B.AGE --B테이블의 AGE조회
+> > FROM EX_TABLE A
+> > CROSS JOIN JOIN_TABLE B
+> > ~~~
+> >
+> > ![CROSS JOIN](./image/CROSSJOIN.png)
+> >
+> >  
+>
+> > **SELF JOIN**
+> >
+> > 셀프 조인은 자기자신과 자기자신을 조인한다는 의미입니다.
+> >
+> > ![SELF JOIN](./image/SELFJOIN.png)
+
+<br/>
+
+<br/>
+
+<br/>
+
  ## Reference
 
 > - [트랜잭션 - 코딩팩토리](https://coding-factory.tistory.com/226)
->
-> - [인덱스 - 후회하기 싫으면 그렇게 살지 말고, 그렇게 살거면 후회하지 마라](https://lalwr.blogspot.com/2016/02/db-index.html)
+>- [인덱스 - 후회하기 싫으면 그렇게 살지 말고, 그렇게 살거면 후회하지 마라](https://lalwr.blogspot.com/2016/02/db-index.html)
+> - [Join - 코딩팩토리님](https://coding-factory.tistory.com/87)
 
 
 
