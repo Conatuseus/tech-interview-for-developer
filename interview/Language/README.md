@@ -467,6 +467,34 @@
 
 <br/>
 
+#### Thread Safe란 뭔가요?
+
+> Thread Safe는 멀티 프로그래밍에서 어떤 함수나 변수, 혹은 객체가 여러 스레드로부터 동시에 접근이 이루어져도 프로그램의 실행에 문제가 없는 것을 의미합니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+#### 그럼 자바에서 Thread Safe하게 코딩하려면 어떻게 해야하나요?
+
+> 자바에서 Thread Safe하게 하는 방법은 Synchronized 키워드를 사용하는 방법, 쓰레드 세이프한 컬렉션 사용하는 방법이 있습니다.
+>
+> Synchronized를 사용하면 한시점에 하나의 Thread만 해당 Method 혹은 Block 을 실행할 수 있도록 Thread 를 제어하는 것입니다.
+>
+> 그리고 쓰레드 세이프한 컬렉션은 Vector, HashTable, Synchronized~(List, Map, Set), Concurrent~ 등이 있습니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
 #### Reference
 
 > - [JVM-Jbee님](https://asfirstalways.tistory.com/158)
