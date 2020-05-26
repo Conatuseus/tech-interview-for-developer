@@ -85,7 +85,7 @@
 
 > 조인은 두 개 이상의 테이블이나 데이터베이스를 연결하여 데이터를 검색하는 방법입니다. 자신이 검색하고 싶은 컬럼이 다른 테이블에 있을경우 주로 사용하며 여러개의 테이블을 마치 하나의 테이블인 것처럼 활용하는 방법입니다. 보통 Primary key혹은 Foreign key로 두 테이블을 연결합니다. 테이블을 연결하려면 적어도 하나의 칼럼은 서로 공유되고 있어야합니다.
 >
-> 조인의 종류는 INNER JOIN, OUTER JOIN(LEFT, RIGHT, FULL), 이 있습니다.
+> 조인의 종류는 INNER JOIN, OUTER JOIN(LEFT, RIGHT, FULL), CROSS JOIN, SELF JOIN 등이 있습니다.
 >
 > > **INNER JOIN(이너 조인)**
 > >
