@@ -397,6 +397,20 @@
 
 <br/>
 
+#### primitive type VS reference type
+
+> 자바에서 기본형 타입(primitive type)은 int, double, float 등을 포함한 8가지가 있습니다. primitive type은 null이 될 수 없으며, 실제 값을 저장하는 공간으로 Stack 영역에 저장됩니다.
+>
+> 참조 타입은 기본형 타입을 제외한 타입으로 클래스 타입, 인터페이스 타입, 배열 타입, 열거(enum) 타입이 있습니다. 빈 객체를 의미하는 Null이 허용됩니다. 그리고 값이 저장되어 있는 곳의 주소값을 저장하는 공간으로 힙(Heap) 메모리에 저장됩니다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
 #### Call by value와 Call by reference에 대해 설명해주세요.
 
 > `Call by value` 호출 방식은 함수 호출 시 전달되는 변수 값을 복사해서 함수 인자로 전달합니다. 이때 복사된 인자는 함수 안에서 지역적으로 사용되기 때문에 local value 속성을 가집니다. 따라서, 함수 안에서 인자 값이 변경되더라도, 외부 변수 값은 변경이 되지 않습니다.
