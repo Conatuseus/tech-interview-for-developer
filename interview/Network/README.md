@@ -109,7 +109,39 @@
 
 <br/>
 
+#### Timeout에 대해
+
+> **Connection Timeout이란?**
+>
+> 클라이언트가 어떤 사유로 인해서 서버에 접근자체를 실패했을시 적용되는 것이 Connection Timeout입니다. 접근을 시도하는 시간제한이 Connection Timeout이 됩니다.
+>
+> 웹 브라우저가 서버에 접속하기 위해선 3-way Handshake가 일어나는데, 3-way handshake가 정상적으로 끝나야 connection이 됬다고 표현할 수 있습니다. 따라서 Connection Timeout은 Connection을 구성하는데 소요되는 시간의 임계치라고도 할 수 있습니다.
+
 <br/>
+
+> **Read Timeout**이란?
+>
+> 클라이언트와 서버가 connection은 맺어졌지만 I/O작업이 길어지거나 락이 걸려 요청이 처리되지 못하고 있을 때 클라이언트는 더 이상 기다리지 못하고 커넥션을 끊습니다. 이런 상황을 Read Timeout 이라고 하는데 java에서는 SocketTimeout Exception이 떨어집니다.
+
+<br/>
+
+> **Statement Timeout**이란?
+>
+> Statement 하나가 얼마나 오래 수행되어도 괜찮은지에 대한 한계 값입니다. JDBC API인 Statement에 타임아웃 값을 설정하며, 이 값을 바탕으로 JDBC 드라이버가 StatementTimeout을 처리합니다. JDBC API인 java.sql.Statement.setQueryTimeout(int timeout) 메서드로 설정합니다.
+
+<br/>
+
+> **Transaction Timeout**이란?
+>
+> TransactionTimeout은 프레임워크(Spring, EJB Container)나 애플리케이션 레벨에서 유효한 타임아웃입니다.
+>
+> 간단히 설명하면 "StatementTimeout x N(Statement 수행 수) + α(가비지 컬렉션 및 기타)"라고 할 수 있습니다. 전체 Statement 수행 시간을 허용할 수 있는 최대 시간 이내로 제한하려 할 때 TransactionTimeout을 사용합니다.
+>
+> 가령 Statement 한 개를 수행할 때 0.1초가 필요하다면, 몇 개 안 되는 Statement를 수행할 때에는 문제가 없습니다. 그러나 Statement 10만 개를 수행할 때에는 일만 초(약 7시간)가 필요합니다. TransactionTimeout은 이런 경우에 사용할 수 있습니다.
+
+<br/>
+
+![timeout](image/Timeout.png)
 
 <br/>
 
@@ -120,3 +152,4 @@
 ## REFERENCE
 
 > - [HTTP/2.0](https://www.popit.kr/나만-모르고-있던-http2/)
+> - [Timeout - 네이버 D2](https://d2.naver.com/helloworld/1321)
