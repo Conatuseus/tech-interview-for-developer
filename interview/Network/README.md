@@ -149,7 +149,55 @@
 
 <br/>
 
+#### 3-way handshake
+
+> 3way handshake는 TCP/IP 프로토콜을 이용해서 통신을 하는 응용 프로그램이 데이터를 전송하기 전에 먼저 정확한 전송을 보장하기 위해 상대방 컴퓨터와 사전에 세션을 수립하는 과정입니다.
+>
+> 과정(A: 클라이언트, B: 서버)
+>
+> 1. A → B: SYN
+>    - 접속 요청 프로세스 A가 연결 요청 메시지 전송 (SYN)
+>      송신자가 최초로 데이터를 전송할 때 Sequence Number를 임의의 랜덤 숫자로 지정하고, SYN 플래그 비트를 1로 설정한 세그먼트를 전송한다.
+> 2. B → A: SYN + ACK
+>    - 접속 요청을 받은 프로세스 B가 요청을 수락했으며, 접속 요청 프로세스인 A도 포트를 열어 달라는 메시지 전송 (SYN + ACK)
+>      수신자는 Acknowledgement Number 필드를 (Sequence Number + 1)로 지정하고, SYN과 ACK 플래그 비트를 1로 설정한 세그먼트를 전송한다.
+> 3. A → B: ACK
+>    - 마지막으로 접속 요청 프로세스 A가 수락 확인을 보내 연결을 맺음 (ACK)
+>      이때, 전송할 데이터가 있으면 이 단계에서 데이터를 전송할 수 있다.
+
+<br/>
+
+<br/>
+
+<br/>
+
+#### 4-way Handshake
+
+> 4-way handshake는 TCP의 연결을 해제(Connection Termination) 하는 과정입니다.
+>
+> 과정(A: 클라이언트, B: 서버)
+>
+> 1. A → B: FIN
+>    프로세스 A가 연결을 종료하겠다는 FIN 플래그를 전송
+>    프로세스 B가 FIN 플래그로 응답하기 전까지 연결을 계속 유지
+> 2. B → A: ACK
+>    프로세스 B는 일단 확인 메시지를 보내고 자신의 통신이 끝날 때까지 기다린다. (이 상태가 TIME_WAIT 상태)
+>    수신자는 Acknowledgement Number 필드를 (Sequence Number + 1)로 지정하고, ACK 플래그 비트를 1로 설정한 세그먼트를 전송한다.
+>    그리고 자신이 전송할 데이터가 남아있다면 이어서 계속 전송한다.
+> 3. B → A: FIN
+>    프로세스 B가 통신이 끝났으면 연결 종료 요청에 합의한다는 의미로 프로세스 A에게 FIN 플래그를 전송
+> 4. A → B: ACK
+>    프로세스 A는 확인했다는 메시지를 전송
+>
+
+<br/>
+
+<br/>
+
+<br/>
+
 ## REFERENCE
 
 > - [HTTP/2.0](https://www.popit.kr/나만-모르고-있던-http2/)
 > - [Timeout - 네이버 D2](https://d2.naver.com/helloworld/1321)
+> - [3-way handshake, 4-way handshake](https://gmlwjd9405.github.io/2018/09/19/tcp-connection.html)
