@@ -170,6 +170,20 @@
 
 <br/>
 
+#### @Transactional 의 isolation level(격리 수준)에 대해 설명해주세요.
+
+<br/>
+<br/>
+<br/>
+
+#### @Transactional 의 propagation(전파옵션)에 대해 설명해주세요.
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 # JPA
 
 <br/>
