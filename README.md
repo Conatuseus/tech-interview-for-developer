@@ -4,11 +4,6 @@
 
 <br/>
 
-**채용 공고(경력)**
-- [네이버 웹툰](https://recruit.webtoonscorp.com/webtoon/ko/joinUs): 2021.09.13 ~ 26(토요일)
-- [우아한형제들](https://career.woowahan.com/#recruit-list): 2021.09.16 ~ 30(목요일 오후6시까지)
-- [빗썸](https://bithumbcorp.recruiter.co.kr/appsite/company/index): 2021.09.18 ~ 10.2(토요일) 
-
 <br/>
 
 ## 🔎 Interview
