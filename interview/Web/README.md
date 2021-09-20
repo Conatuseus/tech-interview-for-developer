@@ -200,7 +200,19 @@
 
 #### @Transactional 의 isolation level(격리 수준)에 대해 설명해주세요.
 
-> 
+> - READ UNCOMMITTED
+>   - 트랜잭션의 커밋이나 롤백 여부에 상관없이 다른 트랜잭션에서 데이터를 읽을 수 있습니다. 
+>   - 한 트랜잭션의 수정이 커밋되지 않았는데, 다른 트랜잭션에서 수정된 데이터를 읽을 수 있어서 정합성 문제가 발생할 수 있습니다. (Dirty Read 발생) 
+> - READ COMMITTED
+>   - Commit된 데이터만 읽어 올 수 있습니다.
+>   - 하지만 하나의 트랜잭션내에서 똑같은 SELECT 쿼리를 실행했을 때는 항상 같은 결과를 가져와야 하는 `REPEATABLE READ`의 정합성에 어긋납니다.
+> - REPEATABLE READ
+>   - 트랜잭션이 시작되기 전에 커밋된 내용에 대해서만 조회할 수 있는 격리수준입니다.
+>   - NON-REPEATABLE 부정합은 발생하지 않으나 PHANTOM READ가 발생할 수 있습니다.
+>   - PHANTOM READ는 다른 트랜잭션에서 수행한 변경 작업에 의해 레코드가 보였다가 안보였다가 하는 현상입니다.
+> - SERIALIZABLE
+>   - 가장 엄격한 격리 수준이며, Phantom Read는 발생하지 않지만 동시성 처리 성능이 가장 낮습니다.
+> - 이 부분은 Real My SQL 191 페이지를 참고하자.
 
 <br/>
 <br/>
