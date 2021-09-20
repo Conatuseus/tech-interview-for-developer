@@ -170,7 +170,7 @@
 
 <br/>
 
-#### @Transactional 의 isolation level(격리 수준)에 대해 설명해주세요.
+#### @Transactional 의 propagation(전파옵션)에 대해 설명해주세요.
 
 > - REQUIRED
 >   - 부모 트랜잭션이 없으면 트랜잭션을 생성하고, 부모 트랜잭션이 있다면 부모 트랜잭션 내에서 실행한다.
@@ -198,11 +198,20 @@
 <br/>
 <br/>
 
-#### @Transactional 의 propagation(전파옵션)에 대해 설명해주세요.
+#### @Transactional 의 isolation level(격리 수준)에 대해 설명해주세요.
+
+> 
 
 <br/>
 <br/>
 <br/>
+
+#### @Transactional 의 readOnly 속성에 대해 설명해주세요.
+
+> 
+
+<br/>
+<br/><br/>
 <br/>
 <br/>
 
