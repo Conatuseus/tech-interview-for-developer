@@ -118,7 +118,13 @@
 
 #### Filter와 Interceptor에 대해 소개해주세요
 
-> Filter는 dispatcher servlet이 처리하기 전후에 동작하며, 요청 내용을 변경하거나 여러가지 체크를 할 수 있습니다. Interceptor는 스프링 컨텍스트 내부에 존재하여 컨트롤러의 전후에 동작하며 처리 작업을 할 수 있습니다. 인터셉터는 로그인 체크, 권한 체크 등의 처리가 가능합니다.
+>  Filter는 dispatcher servlet에 요청이 전달되기 전후에 동작하며, url 패턴에 맞는 모든 요청에 대해 부가작업을 처리할 수 있는 기능을 제공합니다. Spring Context 내부가 아닌, 톰캣과 같은 웹 컨테이너에 의해 관리됩니다.
+>  Filter에는 init, doFilter, destroy 메서드가 있습니다. 
+>  init 메서드는 필터 객체를 초기화하고, 서비스에 추가하기 위한 메서드입니다. 웹 컨테이너가 1회 init 메소드를 호출하여 필 터 객체를 초기화하면 이후의 요청들은 doFilter를 통해 전/후에 처리된다.
+>  doFilter 메서드는 url 패턴에 맞는 모든 HTTP 요청이 디스패처 서블릿으로 전달되기 전/후에 웹 컨테이너에 의해 실행되는 메소드입니다.
+>  destroy 메소드는 필터 객체를 서비스에서 제거하고 사용하는 자원을 반환하기 위한 메소드입니다.
+>
+>  Interceptor는 스프링이 제공하는 기능으로, Dispatcher Servlet이 컨트롤러를 호출하기 전/후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공합니다. 
 
 ![Spring Flow 이미지](./image/spring_flow.png)
 
@@ -308,4 +314,4 @@
 > - [AOP](https://shlee0882.tistory.com/206)
 >
 > - [AOP-이동욱님](https://jojoldu.tistory.com/71)
-> - [Controller VS RestController - 망나니 개발자](https://mangkyu.tistory.com/49)
+> - [Controller VS RestController, Filter&Interceptor - 망나니 개발자](https://mangkyu.tistory.com/49)
