@@ -63,7 +63,11 @@
 
 #### Dispatcher Servlet에 대해 설명해주세요.
 
-> Dispatcher Servlet는 클라이언트의 모든 요청을 받아서 필요한 처리를 하고, 요청에 맞는 Handler로 요청을 Dispatch하고, 해당 Handler의 실행결과를 HTTP Response로 만드는 역할을 합니다.
+> 디스패처 서블릿은 가장 앞단에서 HTTP 프로토콜로 들어오는 모든 요청을 가장 먼저 받아 적합한 컨트롤러에 위임해주는 프론트 컨트롤러(Front Controller)라고 정의할 수 있습니다.
+>
+> ![dispatcherServlet](./image/dispatcherServlet.png)
+>
+> 
 
 <br/>
 
